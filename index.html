@@ -1,10 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    
-    <title>Document</title>
+<head>    
+    <title>Photo app</title>
+    <!-- Vue.js library -->
+    <script src="https://unpkg.com/vue"></script>
+
+    <!-- Materialize library -->
+
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+     <!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+
+     <!-- Material icons -->
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+     <!-- axios - Promise based HTTP client for the browser and node.js -->
+     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+     
+
 </head>
 <body>
-    
+    <div class="container" id="app">
+            <h1>Choose your photo</h1>            
+            <input v-model="query" v-on:keyUp.enter="get_photos()">
+            <a href="" class="btn" v-if="fav_exist" @click.prevent="show_photos=toggle_button()">{{fav_title}}</a>
+            <a href="" class="btn" v-if="fav_exist" @click.prevent="clear_favorites()">Clear favorites</a>
+            <div class ="row">
+            <div v-for="(photo, index) in show_photos">
+                <div class ="card col s3">
+                <div class = "card-image" style="position:relative;">
+                    <a v-bind:href="photo"><img v-bind:src="photo" style="padding:10px;height:200px;" alt="">
+                    </a>
+                    <a class="btn-floating waves-effect" v-bind:class="{yellow:favorites.includes(photo), grey:!favorites.includes(photo)}" style="position:absolute; top:0; right:0;" @click="save_fav(photo)">
+                        <i class="material-icons">stars</i></a>
+                    
+                </div>
+                   
+                   <!-- <a class="btn amber lighten-4">button {{index}}</a> -->
+            </div> 
+        </div>
+        </div>   
+        
 </body>
+<script src="scripts/photos.js"></script>
 </html>
+
+
+
